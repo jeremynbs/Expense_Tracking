@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Categories - Expense Tracker</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">💸 Expense Tracker</div>
+      <nav class="nav">
+        <a href="/">Dashboard</a>
+        <a href="/expenses">Expenses</a>
+        <a href="/Income">Income</a>
+        <a href="/categories" class="active">Categories</a>
+        <a href="/reports">Reports</a>
+        <a href="/Account">Account</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h1>Categories</h1>
+      </header>
+
+      <section class="card">
+        <div class="filter-bar">
+          <button onclick="showForm()">+ Add Category</button>
+        </div>
+
+        <div id="categories-list"></div>
+
+        <form id="category-form" class="expense-form hidden" onsubmit="submitCategory(event)">
+          <h3>Add/Edit Category</h3>
+          <input type="text" id="category-name" placeholder="Name" required>
+          <input type="number" id="category-budget" placeholder="Monthly Budget">
+          <input type="hidden" id="category-id">
+          <button type="submit">Save</button>
+          <button type="button" onclick="hideForm()">Cancel</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/categories.js"></script>
+</body>
+</html>
