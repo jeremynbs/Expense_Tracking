@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Reports</h2>
+
+<form method="GET" action="/reports">
+  <label>Type:
+    <select name="type">
+      <option value="income" {% if entry_type == "income" %}selected{% endif %}>Income</option>
+      <option value="expense" {% if entry_type == "expense" %}selected{% endif %}>Expense</option>
+    </select>
+  </label>
+  <label>Start Date: <input type="date" name="start" /></label>
+  <label>End Date: <input type="date" name="end" /></label>
+  <button type="submit">Filter</button>
+</form>
+
+<br>
+<a href="/reports/export/csv?type={{ entry_type }}&start={{ request.args.start }}&end={{ request.args.end }}">Export CSV</a> |
+<a href="/reports/export/pdf?type={{ entry_type }}&start={{ request.args.start }}&end={{ request.args.end }}">Export PDF</a>
+
+<table>
+  <thead>
+    <tr><th>Date</th><th>Amount</th><th>Category</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    {% for r in records %}
+    <tr>
+      <td>{{ r.date }}</td>
+      <td>${{ r.amount }}</td>
+      <td>{{ r.category.name }}</td>
+      <td>{{ r.description or '' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

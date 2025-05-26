@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Manage Categories</h2>
+
+<form method="POST" action="/categories">
+  <label>Category Name: <input type="text" name="name" required /></label>
+  <label>Type:
+    <select name="type" required>
+      <option value="income">Income</option>
+      <option value="expense">Expense</option>
+    </select>
+  </label>
+  <button type="submit">Add Category</button>
+</form>
+
+<h3>Income Categories</h3>
+<ul>
+  {% for cat in income_categories %}
+    <li>{{ cat.name }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Expense Categories</h3>
+<ul>
+  {% for cat in expense_categories %}
+    <li>{{ cat.name }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

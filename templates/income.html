@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Income</h2>
+
+<!-- Add Income Form -->
+<form id="income-form" method="POST" action="/income/add">
+  <label>Amount: <input type="number" name="amount" step="0.01" required /></label>
+  <label>Date: <input type="date" name="date" required /></label>
+  <label>Category:
+    <select name="category_id" required>
+      {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Description: <input type="text" name="description" /></label>
+  <button type="submit">Add Income</button>
+</form>
+
+<!-- Income Table -->
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for income in income_records %}
+    <tr>
+      <td>{{ income.date }}</td>
+      <td>${{ income.amount }}</td>
+      <td>{{ income.category.name }}</td>
+      <td>{{ income.description or "" }}</td>
+      <td>
+        <a href="/income/edit/{{ income.id }}">Edit</a>
+        <a href="/income/delete/{{ income.id }}" onclick="return confirm('Delete this income?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

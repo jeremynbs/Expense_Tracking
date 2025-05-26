@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+  {% if request.path != "/login" %}
+  <aside class="sidebar" id="sidebar">
+    <button onclick="toggleSidebar()">☰</button>
+    <nav>
+      <a href="/">Dashboard</a>
+      <a href="/income">Income</a>
+      <a href="/expenses">Expenses</a>
+      <a href="/categories">Categories</a>
+      <a href="/reports">Reports</a>
+    </nav>
+    <button class="logout-button" onclick="showLogoutConfirm()">Logout</button>
+  </aside>
+  {% endif %}
+
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Logout Modal -->
+  <div id="logout-modal" class="modal hidden">
+    <div class="modal-content">
+      <p>Are you sure you want to log out?</p>
+      <button onclick="logout()">Log out</button>
+      <button onclick="hideLogoutConfirm()">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("minimized");
+    }
+
+    function showLogoutConfirm() {
+      document.getElementById("logout-modal").classList.remove("hidden");
+    }
+
+    function hideLogoutConfirm() {
+      document.getElementById("logout-modal").classList.add("hidden");
+    }
+
+    function logout() {
+      fetch("/api/logout", { method: "POST" })
+        .then(() => window.location.href = "/login");
+    }
+  </script>
+
+</body>
+</html>
