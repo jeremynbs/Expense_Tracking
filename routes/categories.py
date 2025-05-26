@@ -1,6 +1,6 @@
 # routes/categories.py
 
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, get_flashed_messages
 from db import db
 from models.category import Category
 
@@ -26,3 +26,34 @@ def manage_categories():
     expense_categories = Category.query.filter_by(user_id=user_id, type="expense").all()
 
     return render_template("categories.html", income_categories=income_categories, expense_categories=expense_categories)
+
+@categories_bp.route("/categories/edit/<int:id>", methods=["GET", "POST"])
+def edit_category(id):
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect("/login")
+
+    category = Category.query.get_or_404(id)
+    if category.user_id != user_id:
+        return "Unauthorized", 403
+
+    if request.method == "POST":
+        category.name = request.form["name"]
+        db.session.commit()
+        return redirect("/categories")
+
+    return render_template("edit_category.html", category=category)
+
+@categories_bp.route("/categories/delete/<int:id>")
+def delete_category(id):
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect("/login")
+
+    category = Category.query.get_or_404(id)
+    if category.user_id != user_id:
+        return "Unauthorized", 403
+
+    db.session.delete(category)
+    db.session.commit()
+    return redirect("/categories")

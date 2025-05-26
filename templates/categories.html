@@ -17,14 +17,22 @@
 <h3>Income Categories</h3>
 <ul>
   {% for cat in income_categories %}
-    <li>{{ cat.name }}</li>
+    <li>
+      {{ cat.name }}
+      <a href="/categories/edit/{{ cat.id }}">Edit</a> |
+      <a href="/categories/delete/{{ cat.id }}" onclick="return confirm('Delete this category?')">Delete</a>
+    </li>
   {% endfor %}
 </ul>
 
 <h3>Expense Categories</h3>
 <ul>
   {% for cat in expense_categories %}
-    <li>{{ cat.name }}</li>
+    <li>
+      {{ cat.name }}
+      <a href="/categories/edit/{{ cat.id }}">Edit</a> |
+      <a href="/categories/delete/{{ cat.id }}" onclick="return confirm('Delete this category?')">Delete</a>
+    </li>
   {% endfor %}
 </ul>
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Income</h2>
+
+<form method="POST">
+  <label>Amount:
+    <input type="number" name="amount" value="{{ record.amount }}" step="0.01" required />
+  </label>
+  <label>Date:
+    <input type="date" name="date" value="{{ record.date }}" required />
+  </label>
+  <label>Category:
+    <select name="category_id" required>
+      {% for category in categories %}
+        <option value="{{ category.id }}" {% if category.id == record.category_id %}selected{% endif %}>
+          {{ category.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Description:
+    <input type="text" name="description" value="{{ record.description }}" />
+  </label>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

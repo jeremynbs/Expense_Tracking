@@ -1,6 +1,6 @@
 # routes/income.py
 
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, get_flashed_messages
 from db import db
 from models.income import Income
 from models.category import Category
@@ -44,4 +44,40 @@ def add_income():
     db.session.add(new_income)
     db.session.commit()
 
+    return redirect("/income")
+
+@income_bp.route("/income/edit/<int:id>", methods=["GET", "POST"])
+def edit_income(id):
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect("/login")
+
+    record = Income.query.get_or_404(id)
+    if record.user_id != user_id:
+        return "Unauthorized", 403
+
+    if request.method == "POST":
+        record.amount = request.form["amount"]
+        record.date = date.fromisoformat(request.form["date"])
+        record.category_id = request.form["category_id"]
+        record.description = request.form["description"]
+        db.session.commit()
+        return redirect("/income")
+
+    categories = Category.query.filter_by(user_id=user_id, type="income").all()
+    return render_template("edit_income.html", record=record, categories=categories)
+
+
+@income_bp.route("/income/delete/<int:id>")
+def delete_income(id):
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect("/login")
+
+    record = Income.query.get_or_404(id)
+    if record.user_id != user_id:
+        return "Unauthorized", 403
+
+    db.session.delete(record)
+    db.session.commit()
     return redirect("/income")
