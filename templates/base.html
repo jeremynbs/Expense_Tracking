@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Expense Tracker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
@@ -12,13 +13,33 @@
   <aside class="sidebar" id="sidebar">
     <button onclick="toggleSidebar()">☰</button>
     <nav>
-      <a href="/">Dashboard</a>
-      <a href="/income">Income</a>
-      <a href="/expenses">Expenses</a>
-      <a href="/categories">Categories</a>
-      <a href="/reports">Reports</a>
+      <a href="/dashboard">
+        <span class="material-icons">dashboard</span>
+        <span class="label">Dashboard</span>
+      </a>
+      <a href="/income">
+        <span class="material-icons">attach_money</span>
+        <span class="label">Income</span>
+      </a>
+      <a href="/expenses">
+        <span class="material-icons">money_off</span>
+        <span class="label">Expenses</span>
+      </a>
+      <a href="/categories">
+        <span class="material-icons">category</span>
+        <span class="label">Categories</span>
+      </a>
+      <a href="/reports">
+        <span class="material-icons">bar_chart</span>
+        <span class="label">Reports</span>
+      </a>
     </nav>
-    <button class="logout-button" onclick="showLogoutConfirm()">Logout</button>
+
+    <button class="logout-button" onclick="showLogoutConfirm()">
+      <span class="material-icons">logout</span>
+        <span class="label">Logout</span>
+    </button>
+
   </aside>
   {% endif %}
 
