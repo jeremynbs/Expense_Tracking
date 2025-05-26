@@ -37,8 +37,8 @@
       <td>{{ income.category.name }}</td>
       <td>{{ income.description or "" }}</td>
       <td>
-        <a href="/income/edit/{{ income.id }}">Edit</a>
-        <a href="/income/delete/{{ income.id }}" onclick="return confirm('Delete this income?')">Delete</a>
+        <a class="btn" href="/income/edit/{{ income.id }}">Edit</a>
+        <a class="btn" href="/income/delete/{{ income.id }}" onclick="return confirm('Delete this income?')">Delete</a>
       </td>
     </tr>
     {% endfor %}

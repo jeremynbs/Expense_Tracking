@@ -3,37 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login – Expense Tracker</title>
-
-  <!-- Google Identity Services -->
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-  <!-- Inject client ID from Flask into JS -->
-  <script>
-    const GOOGLE_CLIENT_ID = "{{ google_client_id }}";
-  </script>
-
-  <!-- Your custom auth logic -->
-  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
-
-  <style>
-    body {
-      font-family: sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f9f9f9;
-    }
-    #login-container {
-      text-align: center;
-    }
-  </style>
 </head>
-<body>
-  <div id="login-container">
-    <h1>Welcome to Expense Tracker</h1>
+<body class="login-body">
+
+  <div class="login-card">
+    <h2>Welcome to Expense Tracker</h2>
+    <p>Log in to continue</p>
     <div id="google-login"></div>
   </div>
+
+  <script>
+    const GOOGLE_CLIENT_ID = "{{ google_client_id }}";
+
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: function (response) {
+          fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id_token: response.credential })
+          }).then(() => window.location.href = "/dashboard");
+        }
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById("google-login"),
+        { theme: "outline", size: "large", width: "100%" }
+      );
+    };
+  </script>
+
 </body>
 </html>

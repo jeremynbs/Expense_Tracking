@@ -27,7 +27,14 @@ fetch("/api/dashboard-data")
       },
       options: {
         responsive: true,
-        plugins: { legend: { display: false } }
+        plugins: { 
+          legend: { display: false },
+          title: {
+            display: true,
+            text: "Daily Balance (Last 10 Days)",
+            font: { size: 16 , weight: 'bold' }
+          }
+        }
       }
     });
 
@@ -44,7 +51,14 @@ fetch("/api/dashboard-data")
       },
       options: {
         responsive: true,
-        plugins: { legend: { display: false } }
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: "Income vs Expense",
+            font: { size: 16 , weight: 'bold' }
+          }
+        }
       }
     });
 
@@ -58,7 +72,15 @@ fetch("/api/dashboard-data")
           backgroundColor: ["#1abc9c", "#16a085", "#2ecc71", "#27ae60"]
         }]
       },
-      options: { responsive: true }
+      options: {
+        responsive: true,
+        plugins:{
+          title: {
+            display: true,
+            text: "Income Category Distribution",
+            font: { size: 16 , weight: 'bold' }
+          }
+      }}
     });
 
     // Pie chart: Expense by Category
@@ -71,7 +93,15 @@ fetch("/api/dashboard-data")
           backgroundColor: ["#c0392b", "#e74c3c", "#d35400", "#e67e22"]
         }]
       },
-      options: { responsive: true }
+      options: {
+        responsive: true,
+        plugins:{
+          title: {
+            display: true,
+            text: "Expense Category Distribution",
+            font: { size: 16 , weight: 'bold' }
+          }
+      }}
     });
 
   })

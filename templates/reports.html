@@ -15,8 +15,21 @@
 </form>
 
 <br>
-<a href="/reports/export/csv?type={{ entry_type }}&start={{ request.args.start }}&end={{ request.args.end }}">Export CSV</a> |
-<a href="/reports/export/pdf?type={{ entry_type }}&start={{ request.args.start }}&end={{ request.args.end }}">Export PDF</a>
+<!-- <a href="/reports/export/csv?type={{ entry_type }}&start={{ request.args.start }}&end={{ request.args.end }}">Export CSV</a>
+<a> | </a>
+<a href="/reports/export/pdf?type={{ entry_type }}&start={{ request.args.start }}&end={{ request.args.end }}">Export PDF</a> -->
+
+<div class="export-buttons">
+  <a class="btn" href="/reports/export/csv?type={{ entry_type }}&start={{ request.args.start }}&end={{ request.args.end }}">
+    <span class="material-icons">download</span>
+    CSV
+  </a>
+  <a class="btn" href="/reports/export/pdf?type={{ entry_type }}&start={{ request.args.start }}&end={{ request.args.end }}">
+    <span class="material-icons">picture_as_pdf</span>
+    PDF
+  </a>
+</div>
+
 
 <table>
   <thead>

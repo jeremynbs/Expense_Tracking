@@ -233,3 +233,53 @@ tr:nth-child(even) {
   padding: 0.75rem 0;
 }
 
+.login-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--background);
+}
+
+.login-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.login-card p {
+  color: var(--gray);
+  margin-bottom: 2rem;
+}
+
+
+.export-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--primary-dark);
+}

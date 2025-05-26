@@ -1,38 +1,61 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h2>Manage Categories</h2>
+<h2>Categories</h2>
 
-<form method="POST" action="/categories">
-  <label>Category Name: <input type="text" name="name" required /></label>
-  <label>Type:
+<form method="POST">
+  <label>
+    Add New Category:
+    <input type="text" name="name" required />
+  </label>
+  <label>
+    Type:
     <select name="type" required>
       <option value="income">Income</option>
       <option value="expense">Expense</option>
     </select>
   </label>
-  <button type="submit">Add Category</button>
+  <button type="submit">Add</button>
 </form>
 
 <h3>Income Categories</h3>
-<ul>
-  {% for cat in income_categories %}
-    <li>
-      {{ cat.name }}
-      <a href="/categories/edit/{{ cat.id }}">Edit</a> |
-      <a href="/categories/delete/{{ cat.id }}" onclick="return confirm('Delete this category?')">Delete</a>
-    </li>
-  {% endfor %}
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cat in income_categories %}
+    <tr>
+      <td>{{ cat.name }}</td>
+      <td>
+        <a class="btn" href="/categories/edit/{{ cat.id }}">Edit</a>
+        <a class="btn" href="/categories/delete/{{ cat.id }}" onclick="return confirm('Delete this category?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 <h3>Expense Categories</h3>
-<ul>
-  {% for cat in expense_categories %}
-    <li>
-      {{ cat.name }}
-      <a href="/categories/edit/{{ cat.id }}">Edit</a> |
-      <a href="/categories/delete/{{ cat.id }}" onclick="return confirm('Delete this category?')">Delete</a>
-    </li>
-  {% endfor %}
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cat in expense_categories %}
+    <tr>
+      <td>{{ cat.name }}</td>
+      <td>
+        <a class="btn" href="/categories/edit/{{ cat.id }}">Edit</a>
+        <a class="btn" href="/categories/delete/{{ cat.id }}" onclick="return confirm('Delete this category?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
