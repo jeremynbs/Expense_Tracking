@@ -1,4 +1,5 @@
-# routes/dashboard.py
+# Code Function: Final Project
+# Date: 2025/05/27, created by: 蕭智強
 
 from flask import Blueprint, jsonify, session, redirect, render_template
 from db import db

@@ -1,3 +1,6 @@
+// Code Function: Final Project
+// Date: 2025/05/27, created by: 蕭智強
+
 // Helper to create a chart
 function renderChart(id, config) {
   const ctx = document.getElementById(id);

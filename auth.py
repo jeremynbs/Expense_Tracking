@@ -1,4 +1,5 @@
-# auth.py
+# Code Function: Final Project
+# Date: 2025/05/27, created by: 蕭智強
 
 from flask import Blueprint, request, session, jsonify, redirect, render_template, current_app
 import requests

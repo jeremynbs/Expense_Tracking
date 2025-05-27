@@ -1,3 +1,6 @@
+<!-- Code Function: Final Project
+Date: 2025/05/27, created by: 蕭智強 -->
+
 # Expense Tracker Web App
 
 A personal finance tracking application built with Flask (Python), PostgreSQL, and JavaScript. Users can log in via Google, track income and expenses, view summaries and graphs, and export data.
