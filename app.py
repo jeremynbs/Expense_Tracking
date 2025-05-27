@@ -1,7 +1,8 @@
 # Code Function: Final Project
 # Date: 2025/05/27, created by: 蕭智強
 
-from flask import Flask, redirect, session
+from flask import Flask, redirect, session, request
+import subprocess
 from flask_cors import CORS
 from flask_session import Session
 from config import Config
@@ -41,6 +42,14 @@ def index():
     if "user_id" not in session:
         return redirect("/login")
     return redirect("/dashboard")
+
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    if request.headers.get("X-GitHub-Event") == "push":
+        subprocess.run(["git", "pull"], cwd="/root/Expense_Tracking")
+        subprocess.run(["systemctl", "restart", "expense-app"])
+        return "Updated", 200
+    return "Ignored", 400
 
 if __name__ == "__main__":
     app.run(debug=True)
