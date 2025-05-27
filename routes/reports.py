@@ -1,7 +1,7 @@
 # Code Function: Final Project
 # Date: 2025/05/27, created by: 蕭智強
 
-from flask import Blueprint, render_template, request, session, send_file
+from flask import Blueprint, render_template, request, session, send_file, redirect
 from db import db
 from models.income import Income
 from models.expense import Expense
