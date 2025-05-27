@@ -6,9 +6,7 @@ from flask_cors import CORS
 from flask_session import Session
 from config import Config
 from db import init_db, db
-
-# Import models to register with SQLAlchemy
-from models import user, income, expense, category
+import os
 
 # Import route blueprints
 from auth import auth_bp
@@ -20,6 +18,9 @@ from routes.reports import reports_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+app.config["SESSION_COOKIE_SECURE"] = os.getenv("SESSION_COOKIE_SECURE", "False") == "True"
+
 
 # Init CORS, sessions, DB
 CORS(app)
