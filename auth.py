@@ -5,7 +5,6 @@ from flask import Blueprint, request, session, jsonify, redirect, render_templat
 import requests
 from db import db
 from models.user import User
-import app
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -44,11 +43,9 @@ def login():
 
         if not user:
             print("Creating new user...")
-            with app.app_context():
-                user = User(google_id=google_id, email=email, name=name, picture=picture)
-                db.session.add(user)
-                db.session.commit()
-
+            user = User(google_id=google_id, email=email, name=name, picture=picture)
+            db.session.add(user)
+            db.session.commit()
 
         session["user_id"] = user.id
         print("Session set with user_id:", user.id)
