@@ -5,7 +5,7 @@ from flask import Blueprint, request, session, jsonify, redirect, render_templat
 import requests
 from db import db
 from models.user import User
-from app import app
+import app
 
 auth_bp = Blueprint("auth", __name__)
 
