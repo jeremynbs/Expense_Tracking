@@ -43,7 +43,7 @@ def index():
         return redirect("/login")
     return redirect("/dashboard")
 
-# Webhook for auto-updating the app 
+# Webhook for auto-updating the app
 @app.route("/webhook", methods=["POST"])
 def webhook():
     if request.headers.get("X-GitHub-Event") == "push":
